@@ -3,7 +3,11 @@ Rails.application.routes.draw do
     root to:'dashboards#show'
   end
   root to: 'homes#show'
-  resources :shouts, only: [:create, :show]
+  resources :shouts, only: [:create, :show] do
+    member do 
+      post 'like' => 'likes#create'
+    end
+  end
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, only: [:create]
 

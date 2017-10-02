@@ -5,4 +5,5 @@
   <%= link_to shout do %>
     <%= time_ago_in_words(shout.created_at) %> ago 
   <% end %>
+  <%= link_to 'Like', like_shout_path(shout), method: :post %>
 </div>
