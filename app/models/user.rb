@@ -7,6 +7,9 @@ class User < ApplicationRecord
   has_many :likes
   has_many :liked_shouts, through: :likes, source: :shout
 
+  has_many :following_relationships, foreign_key: :follower_id
+  has_many :followed_users, through: :following_relationships
+
   def like(shout)
     liked_shouts << shout
   end
@@ -19,7 +22,19 @@ class User < ApplicationRecord
     liked_shouts.destroy(shout)
   end
 
+  def follow(user)
+    followed_users << user
+  end
+
+  def unfollow(user)
+    followed_users.destroy(user)
+  end
+
+  def following?(user)
+    followed_user_ids.include?(user.id)
+  end
+
   def to_param
-   username 
+    username 
   end
 end
