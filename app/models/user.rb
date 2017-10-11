@@ -9,6 +9,9 @@ class User < ApplicationRecord
 
   has_many :following_relationships, foreign_key: :follower_id
   has_many :followed_users, through: :following_relationships
+  
+  has_many :follower_relationshiips, foreign_key: :followed_user_id, class_name: 'FollowingRelationship'
+  has_many :followers, through: :following_relationships
 
   def like(shout)
     liked_shouts << shout
